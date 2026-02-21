@@ -1,55 +1,51 @@
+//fs-module
 const fs = require("fs");
 
-//Asych
-fs.readFile("text.txt", "utf8", (err, data) => {
+//sync = blocking
+//async = non blocking
+fs.writeFileSync("data.txt", "hello ji kk", "utf8", (err) => {
   if (err) {
-    console.log("Error reading file", err);
+    console.err("Error written file", err);
+  } else {
+    console.log("file written sucessfuly");
   }
-  console.log("File content", data);
 });
 
-//synch
-const data = fs.readFileSync('text.txt','utf8');
-console.log('File content',data);
+const data = fs.readFileSync('data.txt','utf8');
+console.log('file content:',data);
 
-//write file
-
-fs.writeFile('data.txt','Hello From Nodejs',(err)=>{
+fs.appendFileSync('data.txt','\nThis is an appended txt',(err)=>{
   if(err){
-    console.error('Error writing file',err);
+    console.error(err);
+    
+  }else{
+    console.log("file appended successfully");
+    
   }
-  console.log('File written Sucessfuly');
+})
+
+
+
+fs.unlinkSync('test.txt');
+console.log('File deleted su');
+
+
+// create a new folder
+fs.mkdirSync('newFolder');
+console.log('folder created successfully');
+
+
+// delete a folder
+fs.rmdirSync('newFolder');
+console.log('folder removed successfuly');
+
+// check file
+
+if(fs.existsSync('data.txt')){
+  console.log('file exists');
   
-})
+}else{
+  console.log('file not found');
+  
+}
 
-//append file
-fs.appendFile('data.txt','\nkokokokok',(err)=>{
-  if(err){
-    console.log('Error appeding to file',err);
-  }
-  else{
-    console.log('File appended succesefull');
-    
-  }
-})
-
-//delete file
-fs.unlink('text.txt',(err)=>{
-  if(err){
-    console.log('Error deleting file',err);
-    
-  }
-  else{
-    console.log('File is deletd');
-    
-  }
-})
-//rename file
-fs.rename('data.txt','newdata.txt',(err)=>{
-  if(err){
-    console.log('Error renaming file',err);
-  }
-  else{
-    console.log('File renamed successfully');
-  }
-})
